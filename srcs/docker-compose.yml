@@ -1,0 +1,13 @@
+services:
+    nginx:
+        build: requirements/nginx
+        ports:
+            - "443:443"
+        # networks:
+        #     - backend
+        # env_file: "requirements/nginx/nginx.env"
+# networks:
+#     backend:
+#         driver: bridge
+    # db:
+    #     driver: bridge
