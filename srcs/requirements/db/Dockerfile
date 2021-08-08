@@ -3,6 +3,7 @@ FROM debian:buster
 ENV BASEDIR=/code
 WORKDIR	${BASEDIR}
 
+# TODO install.sh
 RUN \
 	apt-get update && \
 	apt-get -y install \

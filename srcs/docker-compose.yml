@@ -16,6 +16,10 @@ services:
         env_file: ".env"
         # networks:
         #     - net_db
+    wordpress:
+        build: requirements/wordpress
+        # env_file: ".env"
+
 # networks:
 #     net_reverse_proxy:
 #         driver: bridge

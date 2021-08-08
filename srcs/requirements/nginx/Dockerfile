@@ -10,6 +10,7 @@ ENV INSTALL_SCRIPT=${SCRIPTS}/install.sh
 WORKDIR	${BASEDIR}
 EXPOSE 443
 
+# TODO move in install.sh
 RUN \
 	apt-get update && \
 	apt-get -y install \
