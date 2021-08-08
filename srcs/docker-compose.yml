@@ -3,8 +3,8 @@ services:
         build: requirements/nginx
         ports:
             - "443:443"
-        # networks:
-        #     - net_reverse_proxy
+        networks:
+            - net_reverse_proxy
         # env_file: "requirements/nginx/nginx.env"
         # environment:
         #     - "MYSQL_USER=${MYSQL_USER}"
@@ -14,14 +14,17 @@ services:
     db:
         build: requirements/db
         env_file: ".env"
-        # networks:
-        #     - net_db
+        networks:
+            - net_db
     wordpress:
         build: requirements/wordpress
         # env_file: ".env"
+        networks:
+            - net_db
+            - net_reverse_proxy
 
-# networks:
-#     net_reverse_proxy:
-#         driver: bridge
-    # net_db:
-    #     driver: bridge
+networks:
+    net_reverse_proxy:
+        driver: bridge
+    net_db:
+        driver: bridge

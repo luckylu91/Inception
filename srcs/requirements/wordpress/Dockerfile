@@ -29,4 +29,5 @@ RUN \
 COPY scripts ./scripts
 RUN /bin/bash ./scripts/install.sh
 
-CMD ["/bin/bash"]
+# CMD ["/bin/bash"]
+CMD ["/bin/bash", "--init-file", "scripts/run.sh"]
