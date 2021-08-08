@@ -4,10 +4,20 @@ services:
         ports:
             - "443:443"
         # networks:
-        #     - backend
+        #     - net_reverse_proxy
         # env_file: "requirements/nginx/nginx.env"
+        # environment:
+        #     - "MYSQL_USER=${MYSQL_USER}"
+        #     - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
+        #     - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+        #     - "WORDPRESS_DATABASE=${WORDPRESS_DATABASE}"
+    db:
+        build: requirements/db
+        env_file: ".env"
+        # networks:
+        #     - net_db
 # networks:
-#     backend:
+#     net_reverse_proxy:
 #         driver: bridge
-    # db:
+    # net_db:
     #     driver: bridge
