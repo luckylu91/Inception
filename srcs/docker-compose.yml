@@ -5,6 +5,8 @@ services:
             - "443:443"
         networks:
             - net_reverse_proxy
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
         # env_file: "requirements/nginx/nginx.env"
         # environment:
         #     - "MYSQL_USER=${MYSQL_USER}"
@@ -16,12 +18,16 @@ services:
         env_file: ".env"
         networks:
             - net_db
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
     wordpress:
         build: requirements/wordpress
         # env_file: ".env"
         networks:
             - net_db
             - net_reverse_proxy
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
 
 networks:
     net_reverse_proxy:
