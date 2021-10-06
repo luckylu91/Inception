@@ -1,6 +1,10 @@
 FROM debian:buster
 
 ENV BASEDIR=/code
+ENV CONFIG=${BASEDIR}/config
+ENV SCRIPTS=${BASEDIR}/scripts
+ENV WORDPRESS_LOCATION=/var/www/html
+ENV PHP_FPM_CONF_LOCATION=/etc/php/*/fpm/pool.d
 ENV DEBIAN_FRONTEND noninteractive
 WORKDIR	${BASEDIR}
 
@@ -12,6 +16,7 @@ RUN \
 		curl \
 		php-fpm \
 		php-mysql \
+    vim \
 	# && service apache2 restart \
 	&& apt-get -y install \
 		php-curl \
@@ -26,7 +31,9 @@ RUN \
 	&& apt-get -y autoremove \
 	&& rm -rf /var/lib/apt/lists/*
 
-COPY scripts ./scripts
+COPY config ${CONFIG}
+COPY scripts ${SCRIPTS}
+
 RUN /bin/bash ./scripts/install.sh
 
 # CMD ["/bin/bash"]

@@ -1,10 +1,15 @@
 #!/bin/bash
-cd /var/www/html/
+mkdir -p $WORDPRESS_LOCATION/
+cd $WORDPRESS_LOCATION/
 curl -O https://wordpress.org/latest.tar.gz
 tar -xvf latest.tar.gz
 rm latest.tar.gz
-chown -R www-data:www-data /var/www/html/wordpress
-find /var/www/html/wordpress/ -type d -exec chmod 750 {} \;
-find /var/www/html/wordpress/ -type f -exec chmod 640 {} \;
+chown -R www-data:www-data $WORDPRESS_LOCATION/wordpress
+find $WORDPRESS_LOCATION/wordpress/ -type d -exec chmod 750 {} \;
+find $WORDPRESS_LOCATION/wordpress/ -type f -exec chmod 640 {} \;
 cd wordpress
-mv wp-config-sample.php wp-config.php
+cp $CONFIG/wp-config.php $WORDPRESS_LOCATION/wordpress/
+
+cp $CONFIG/www.conf $PHP_FPM_CONF_LOCATION/www.conf
+
+cp $CONFIG/index.html /

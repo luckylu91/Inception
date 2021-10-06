@@ -17,6 +17,7 @@ RUN \
 		apt-utils \
 		nginx \
 		openssl \
+    vim \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
