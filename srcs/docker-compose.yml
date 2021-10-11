@@ -1,3 +1,6 @@
+# stdin_open: true -> docker run -i
+# tty: true        -> docker run -t
+
 services:
     nginx:
         build: requirements/nginx
@@ -5,32 +8,44 @@ services:
             - "443:443"
         networks:
             - net_reverse_proxy
-        stdin_open: true # docker run -i
-        tty: true        # docker run -t
-        # env_file: "requirements/nginx/nginx.env"
-        # environment:
-        #     - "MYSQL_USER=${MYSQL_USER}"
-        #     - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
-        #     - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
-        #     - "WORDPRESS_DATABASE=${WORDPRESS_DATABASE}"
+        stdin_open: true
+        tty: true
+        volumes:
+            - wordpress:/var/www/html/wordpress:ro
+        #     - "./volumes/wordpress:/var/www/html/wordpress"
+        env_file:
+            - ".env"
     db:
         build: requirements/db
         env_file: ".env"
         networks:
             - net_db
-        stdin_open: true # docker run -i
-        tty: true        # docker run -t
+        stdin_open: true
+        tty: true
+        # volumes:
+            # - wordpress_db:
+        #     - "wordpress_db:" ###
+        env_file:
+            - ".env"
     wordpress:
         build: requirements/wordpress
-        # env_file: ".env"
         networks:
             - net_db
             - net_reverse_proxy
-        stdin_open: true # docker run -i
-        tty: true        # docker run -t
+        stdin_open: true
+        tty: true
+        volumes:
+            - wordpress:/var/www/html/wordpress
+        #     - "./volumes/wordpress:/var/www/html/wordpress:ro"
+        env_file:
+            - ".env"
 
 networks:
     net_reverse_proxy:
         driver: bridge
     net_db:
         driver: bridge
+
+volumes:
+    wordpress_db:
+    wordpress:

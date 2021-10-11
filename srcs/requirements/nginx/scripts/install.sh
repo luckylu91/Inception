@@ -15,3 +15,4 @@ openssl req \
 	-out /etc/ssl/certs/lzins_42_fr.crt \
 	-keyout /etc/ssl/private/lzins_42_fr.key \
 	-subj "/C=FR/ST=/L=Lyon/O=42/CN=lzins.42.fr"
+

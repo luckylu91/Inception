@@ -26,5 +26,5 @@ COPY scripts ${SCRIPTS}
 
 RUN bash ${INSTALL_SCRIPT}
 
-CMD ["nginx", "-g", "daemon off;"]
-# CMD /bin/bash
+# CMD ["nginx", "-g", "daemon off;"]
+CMD service nginx start; /bin/bash
