@@ -3,7 +3,6 @@ FROM debian:buster
 ENV BASEDIR=/code
 ENV CONFIG=${BASEDIR}/config
 ENV SCRIPTS=${BASEDIR}/scripts
-ENV WORDPRESS_LOCATION=/var/www/html
 ENV PHP_FPM_CONF_LOCATION=/etc/php/*/fpm/pool.d
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -41,5 +40,4 @@ COPY scripts ${SCRIPTS}
 
 RUN /bin/bash ${SCRIPTS}/install.sh
 
-# CMD ["/bin/bash"]
-CMD ["/bin/bash", "--init-file", "scripts/run.sh"]
+CMD ["/bin/bash", "--init-file", "${SCRIPTS}/run.sh"]
