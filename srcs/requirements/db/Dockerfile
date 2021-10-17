@@ -3,7 +3,6 @@ FROM debian:buster
 ENV BASEDIR=/code
 ENV CONFIG=${BASEDIR}/config
 ENV SCRIPTS=${BASEDIR}/scripts
-ENV INSTALL_SCRIPT=${SCRIPTS}/install.sh
 
 WORKDIR	${BASEDIR}
 
@@ -23,6 +22,6 @@ RUN \
 COPY config ${CONFIG}
 COPY scripts ${SCRIPTS}
 
-RUN bash ${INSTALL_SCRIPT}
+RUN bash ${SCRIPTS}/install.sh
 
 CMD ["/bin/bash", "--init-file", "scripts/run.sh"]

@@ -4,13 +4,10 @@ ENV BASEDIR=/code
 ENV CONFIG=${BASEDIR}/config
 ENV SCRIPTS=${BASEDIR}/scripts
 ENV NGINX_ROOT=/etc/nginx
-# ENV RUN_SCRIPT=${SCRIPTS}/run.sh
-ENV INSTALL_SCRIPT=${SCRIPTS}/install.sh
 
 WORKDIR	${BASEDIR}
 EXPOSE 443
 
-# TODO move in install.sh
 RUN \
 	apt-get update && \
 	apt-get -y install \
@@ -24,7 +21,7 @@ RUN \
 COPY config ${CONFIG}
 COPY scripts ${SCRIPTS}
 
-RUN bash ${INSTALL_SCRIPT}
+RUN bash ${SCRIPTS}/install.sh
 
 # CMD ["nginx", "-g", "daemon off;"]
 CMD service nginx start; /bin/bash

@@ -14,6 +14,7 @@ services:
             - wordpress_files:${WORDPRESS_PATH}
         env_file:
             - ".env"
+        restart: on-failure
     db:
         build: requirements/db
         env_file: ".env"
@@ -26,6 +27,7 @@ services:
         #     - "wordpress_db:" ###
         env_file:
             - ".env"
+        restart: on-failure
     wordpress:
         build: requirements/wordpress
         networks:
@@ -37,6 +39,7 @@ services:
             - wordpress_files:${WORDPRESS_PATH}
         env_file:
             - ".env"
+        restart: on-failure
 
 networks:
     net_reverse_proxy:

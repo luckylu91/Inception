@@ -40,4 +40,4 @@ COPY scripts ${SCRIPTS}
 
 RUN /bin/bash ${SCRIPTS}/install.sh
 
-CMD ["/bin/bash", "--init-file", "${SCRIPTS}/run.sh"]
+CMD ["/bin/bash", "--init-file", "/code/scripts/run.sh"]
