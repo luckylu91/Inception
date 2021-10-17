@@ -11,8 +11,7 @@ services:
         stdin_open: true
         tty: true
         volumes:
-            - wordpress:/var/www/html/wordpress:ro
-        #     - "./volumes/wordpress:/var/www/html/wordpress"
+            - wordpress_files:${WORDPRESS_PATH}
         env_file:
             - ".env"
     db:
@@ -22,8 +21,8 @@ services:
             - net_db
         stdin_open: true
         tty: true
-        # volumes:
-            # - wordpress_db:
+        volumes:
+            - wordpress_db:/var/lib/mysql/
         #     - "wordpress_db:" ###
         env_file:
             - ".env"
@@ -35,8 +34,7 @@ services:
         stdin_open: true
         tty: true
         volumes:
-            - wordpress:/var/www/html/wordpress
-        #     - "./volumes/wordpress:/var/www/html/wordpress:ro"
+            - wordpress_files:${WORDPRESS_PATH}
         env_file:
             - ".env"
 
@@ -48,4 +46,4 @@ networks:
 
 volumes:
     wordpress_db:
-    wordpress:
+    wordpress_files:
