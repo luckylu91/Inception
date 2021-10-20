@@ -12,7 +12,6 @@ WORKDIR	${BASEDIR}
 RUN \
 	apt-get update && \
 	apt-get -y install \
-		# apache2 \
 		curl \
 		# //
 		net-tools \
@@ -21,7 +20,6 @@ RUN \
 		php-fpm \
 		php-mysql \
 		vim \
-	# && service apache2 restart \
 	&& apt-get -y install \
 		php-curl \
 		php-gd \
