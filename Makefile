@@ -5,3 +5,7 @@ all:
 
 fclean:
 	docker-compose $(LOCATION_OPT) -- down
+
+re:
+	docker-compose $(LOCATION_OPT) -- up --build -d
+
