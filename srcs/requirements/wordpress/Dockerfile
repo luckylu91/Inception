@@ -6,9 +6,12 @@ ENV SCRIPTS=${BASEDIR}/scripts
 ENV PHP_FPM_CONF_LOCATION=/etc/php/*/fpm/pool.d
 ENV DEBIAN_FRONTEND noninteractive
 
+ENV MYSQL_USER=lzins
+ENV MYSQL_PASSWORD=1337
+ENV WORDPRESS_DATABASE=wordpress_db
+
 WORKDIR	${BASEDIR}
 
-# TODO move in install.sh
 RUN \
 	apt-get update && \
 	apt-get -y install \
@@ -36,6 +39,6 @@ RUN \
 COPY config ${CONFIG}
 COPY scripts ${SCRIPTS}
 
-RUN /bin/bash ${SCRIPTS}/install.sh
+RUN bash ${SCRIPTS}/install.sh
 
 CMD ["/bin/bash", "--init-file", "/code/scripts/run.sh"]

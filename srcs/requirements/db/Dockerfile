@@ -11,9 +11,6 @@ RUN \
 	apt-get update && \
 	apt-get -y install \
 		mariadb-server \
-		# //
-		net-tools \
-		# //
     vim \
 	&& apt-get -y clean \
 	&& apt-get -y autoremove \
