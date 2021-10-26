@@ -1,6 +1,6 @@
 cd $BASEDIR
 
-if [ -z "$(ls -A \"$WORDPRESS_PATH\")" ]; then
+if [ -z "$(ls -A ""$WORDPRESS_PATH"")" ]; then
 
    # WORDPRESS INSTALLATION
 

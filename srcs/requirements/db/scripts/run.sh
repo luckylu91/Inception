@@ -1,6 +1,12 @@
 #!/bin/bash
 service mysql start
 
+echo "mysql service started"
+
+# if [ -z "$(echo "SHOW DATABASES LIKE '""$WORDPRESS_DATABASE""';" | mysql -u root  -password=""$MYSQL_ROOT_PASSWORD"")" ]; then
+#     mysql -u root -p $WORDPRESS_DATABASE < $CONFIG/dbexport.sql
+# fi
+
 commands=$(cat << END_OF_COMMANDS
 DROP USER $MYSQL_USER@'%';
 FLUSH PRIVILEGES;
@@ -18,14 +24,3 @@ while IFS= read -r line; do
     echo "$line" | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
 done <<< "$commands"
 
-# echo "===== MySQL commands ========="
-# echo "$commands"
-# echo "===== End MySQL commands ====="
-# commands=$(cat << END_OF_COMMANDS
-# INSERT INTO $WORDPRESS_DATABASE.wp_users (ID, user_login, user_pass, user_nicename, user_email, user_status, display_name) VALUES ('1000', 'tempuser', MD5('Str0ngPa55!'), 'tempuser', 'support@wpwhitesecurity.com', '0', 'Temp User');
-# INSERT INTO $WORDPRESS_DATABASE.wp_usermeta (umeta_id, user_id, meta_key, meta_value) VALUES (NULL, '1000', 'wp_capabilities', 'a:1:{s:13:"administrator";b:1;}');
-# INSERT INTO $WORDPRESS_DATABASE.wp_usermeta (umeta_id, user_id, meta_key, meta_value) VALUES (NULL, '1000', 'wp_user_level', '10');
-# END_OF_COMMANDS
-# )
-
-# echo "$commands" | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
