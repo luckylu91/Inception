@@ -23,9 +23,9 @@ services:
             - net_db
         stdin_open: true
         tty: true
-        volumes:
+        # volumes:
             # - wordpress_db:/var/lib/mysql/
-            - "/home/lzins/data/wordpress_db:/var/lib/mysql/"
+            # - "/home/lzins/data/wordpress_db:/var/lib/mysql/"
         env_file:
             - ".env"
         # restart: on-failure

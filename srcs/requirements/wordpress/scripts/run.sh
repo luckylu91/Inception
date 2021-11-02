@@ -5,6 +5,7 @@ if [ -z "$(ls -A ""$WORDPRESS_PATH"")" ]; then
    # WORDPRESS INSTALLATION
 
    tar -xvf latest.tar.gz --directory $WORDPRESS_PARENT_PATH
+   rm latest.tar.gz
 
    chown -R www-data:www-data $WORDPRESS_PATH
    find $WORDPRESS_PATH -type d -exec chmod 750 {} \;
@@ -17,6 +18,5 @@ if [ -z "$(ls -A ""$WORDPRESS_PATH"")" ]; then
 
 fi
 
-rm latest.tar.gz
 
 service php7.3-fpm start

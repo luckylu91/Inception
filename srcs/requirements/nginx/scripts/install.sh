@@ -1,9 +1,7 @@
 rm -f $NGINX_ROOT/sites-available/default
 rm -f $NGINX_ROOT/sites-enabled/default
-rm -f $NGINX_ROOT/nginx.conf
 cp $CONFIG/servers.conf $NGINX_ROOT/sites-available/servers.conf
 cp -l $NGINX_ROOT/sites-available/servers.conf $NGINX_ROOT/sites-enabled/servers.conf
-cp $CONFIG/nginx.conf $NGINX_ROOT/nginx.conf
 
 mkdir -p /etc/ssl
 

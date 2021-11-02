@@ -2,32 +2,34 @@ LOC_OPTION = --project-directory srcs/
 VOLUMES_HOST = /home/lzins/data/wordpress_files /home/lzins/data/wordpress_db
 
 all: $(VOLUMES_HOST)
-	docker-compose $(LOC_OPTION) -- up
+	sudo bash srcs/add_localhost_name.sh
+	sudo docker-compose $(LOC_OPTION) -- up
 
 $(VOLUMES_HOST):
 	mkdir -p $@
 
 build:
-	docker-compose $(LOC_OPTION) -- up --build
+	sudo docker-compose $(LOC_OPTION) -- up --build
 
 clean:
-	docker-compose $(LOC_OPTION) -- down
+	sudo docker-compose $(LOC_OPTION) -- down
 
 fclean:
-	docker-compose $(LOC_OPTION) -- down
-	docker-compose $(LOC_OPTION) -- rm -fsv
-	docker rmi -f inception_wordpress inception_db inception_nginx
+	sudo docker-compose $(LOC_OPTION) -- down
+	sudo docker-compose $(LOC_OPTION) -- rm -fsv
+	sudo docker rmi -f inception_wordpress inception_db inception_nginx
+	sudo rm -rf $(VOLUMES_HOST)
 
 re: fclean all
 
 cdb:
-	docker attach inception_db_1
+	sudo docker attach inception_db_1
 cwo:
-	docker attach inception_wordpress_1
+	sudo docker attach inception_wordpress_1
 cng:
-	docker attach inception_nginx_1
+	sudo docker attach inception_nginx_1
 
 emptycache:
-	docker system prune -a
+	sudo docker system prune -a
 
 .PHONY: all build clean fclean re emptycache
