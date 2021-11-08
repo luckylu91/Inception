@@ -1,6 +1,3 @@
-# stdin_open: true -> docker run -i
-# tty: true        -> docker run -t
-
 services:
     nginx:
         build: requirements/nginx
@@ -11,11 +8,10 @@ services:
         stdin_open: true
         tty: true
         volumes:
-            # - wordpress_files:${WORDPRESS_PATH}
-            - /home/lzins/data/wordpress_files:${WORDPRESS_PATH}
+            - "/home/lzins/data/wordpress_files:${WORDPRESS_PATH}"
         env_file:
             - ".env"
-        # restart: on-failure
+        restart: on-failure
     db:
         build: requirements/db
         env_file: ".env"
@@ -23,12 +19,11 @@ services:
             - net_db
         stdin_open: true
         tty: true
-        # volumes:
-            # - wordpress_db:/var/lib/mysql/
-            # - "/home/lzins/data/wordpress_db:/var/lib/mysql/"
+        volumes:
+            - "/home/lzins/data/wordpress_db:${MYSQL_VOLUME_DEST}"
         env_file:
             - ".env"
-        # restart: on-failure
+        restart: on-failure
     wordpress:
         build: requirements/wordpress
         networks:
@@ -37,28 +32,13 @@ services:
         stdin_open: true
         tty: true
         volumes:
-            # - wordpress_files:${WORDPRESS_PATH}
-            - /home/lzins/data/wordpress_files:${WORDPRESS_PATH}
+            - "/home/lzins/data/wordpress_files:${WORDPRESS_PATH}"
         env_file:
             - ".env"
-        # restart: on-failure
+        restart: on-failure
 
 networks:
     net_reverse_proxy:
         driver: bridge
     net_db:
         driver: bridge
-
-# volumes:
-#     wordpress_db:
-#         driver: local
-#         driver_opts:
-#             type: 'none'
-#             o: 'bind'
-#             device: '/home/lzins/data/wordpress_db'
-#     wordpress_files:
-#         driver: local
-#         driver_opts:
-#             type: 'none'
-#             o: 'bind'
-#             device: '/home/lzins/data/wordpress_files'
